@@ -81,3 +81,6 @@ def bestScore(score):
             best = score[i]
             partie = i + 1
     return best,partie
+
+def AffichagePenduImage():
+    return

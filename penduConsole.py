@@ -6,7 +6,7 @@ Created on Fri Nov 27 07:41:34 2020
 Programme du pendu version console
 Eliott RAJAUD
 27/11/20
-TODO : 
+TODO : Pendu en tkinter
 
 """
 

@@ -3,6 +3,8 @@
 """
 Created on Fri Nov 27 07:41:34 2020
 
+https://github.com/Eliott-rjd/CS-DevPendu.git
+
 Programme du pendu version console
 Eliott RAJAUD
 27/11/20
@@ -20,7 +22,7 @@ def main():
     jouer = input("Voulez-vous jouer ? ")
     while jouer.upper() == "OUI": 
         motAChercher = ""
-        chance = 8
+        chance = 7
         
         mot=choixMot()
         lettreTrouve = mot[0]

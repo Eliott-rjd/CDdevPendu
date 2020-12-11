@@ -6,7 +6,8 @@ Created on Fri Nov 27 08:01:14 2020
 Fonction utilisé pour le pendu
 ELiott RAJAUD
 27/11/20
-TODO: modidifer la fonction 'dejaUtiliser pour n'en faire qu'une seul pour les deux pendus(modife sur les inputs)
+TODO: -modidifer la fonction 'dejaUtiliser pour n'en faire qu'une seul pour les deux pendus
+    -Emepcher l'utilisateur de saisir des lettres une fois qu'il a gagner/perdu
 """
 
 from random import randint
@@ -86,22 +87,33 @@ def bestScore(score):
 
 
 
-chance = 8
+chance = 7
 
 def lettreUse(lettreJouer,lettre,listeImage,canevas,item,mot,lettreTrouve,motAChercher,trouver):
+    ''' Role : Au clique sur le boutton le programme se lance et verifie si la lettre à déja été joué
+         Il y a beacoup d'entrée car cette fonction en appel d'autre, on lui donne donc toute nos variables
+         Entrée : Une liste de lettre déja joué, la lettre écritre dans l'entry, la liste des images deja traité,
+         le canevas, l'item avec la premiere images, le mot choisit, les lettre trouvé,
+         le mot a chercher constitué d'underscore et le mot qui s'affiche dans la page
+         Sortie : Aucune, on appel un nouvelle fonction'''
     global chance
-
+    
     if lettre.get() in lettreJouer:
         lettre.set('')
         messagebox.showinfo('Resaisier lettre')
     else:
         lettreJouer.append(lettre.get())
-    OK(lettre,mot,item,canevas,listeImage,lettreTrouve,motAChercher,trouver)
-    print(lettreJouer)
+    check(lettre,mot,item,canevas,listeImage,lettreTrouve,motAChercher,trouver)
        
     
 
-def OK(lettre,mot,item,canevas,listeImage,lettreTrouve,motAChercher,trouver):    
+def check(lettre,mot,item,canevas,listeImage,lettreTrouve,motAChercher,trouver):
+    ''' Role: Regarder si la lettre est bien dans les mot 
+        Entré:la lettre écritre dans l'entry, la liste des images deja traité, 
+        le canevas, l'item avec la premiere images, le mot choisit, les lettre trouvé,
+         le mot a chercher constitué d'underscore et le mot qui s'affiche dans la page
+         Sortie: Aucune, on appel la fonction d'affichage'''
+    
     global chance
     
     if lettre.get() !='' and lettre.get() in mot:
@@ -115,7 +127,11 @@ def OK(lettre,mot,item,canevas,listeImage,lettreTrouve,motAChercher,trouver):
         image = affichagePenduTkinter(listeImage,canevas,item,chance)
         item = canevas.create_image(0,0, anchor='nw', image=image)
        
-   
+    if chance == 0:
+        messagebox.showinfo('vous avez perdu')
+    if "_" not in trouver['text']:
+        messagebox.showinfo('vous avez gagné')
+        
 
 
 
@@ -124,21 +140,18 @@ def affichagePenduTkinter(listeImage,canevas,item,chance):
         Entrée : le nombre de chance restante, le canevas
         Sortie : les differentes images en fonction du nombre de chance'''
     canevas.delete(item)
-    if chance==7:
+    if chance==6:
         return listeImage[1]
-    elif chance==6:
-        return listeImage[2]
     elif chance==5:
-        return listeImage[3]
+        return listeImage[2]
     elif chance==4:
-        return listeImage[4]
+        return listeImage[3]
     elif chance==3:
-        return listeImage[5]
+        return listeImage[4]
     elif chance==2:
-        return listeImage[6]
+        return listeImage[5]
     elif chance==1:
-        return listeImage[7]
+        return listeImage[6]
     elif chance==0:
-        print('perdu')
-        return listeImage[8]
+        return listeImage[7]
 

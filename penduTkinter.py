@@ -4,16 +4,15 @@
 Programme du pendu version graphique
 Eliott RAJAUD
 11/12/20
-TODO : Pendu en tkinter
+TODO : Faire un meilleur affichage, plus jolie
 """
 
-from tkinter import Tk,Label, Button,Frame,Entry,StringVar,Canvas,PhotoImage
-from fonctionPendu import choixMot, lettreCorrect, dejaUtiliser,bestScore,affichagePenduTkinter,lettreUse
+from tkinter import Tk,Label, Button,Entry,StringVar,Canvas,PhotoImage
+from fonctionPendu import choixMot, lettreCorrect,lettreUse
 
 motAChercher = ""
 mot=choixMot()
 
-print(mot)
 lettreTrouve = [mot[0]]
 lettreJouer = [mot[0]]
 lienImage = ['bonhomme1.gif','bonhomme2.gif','bonhomme3.gif','bonhomme4.gif','bonhomme5.gif','bonhomme6.gif','bonhomme7.gif','bonhomme8.gif']

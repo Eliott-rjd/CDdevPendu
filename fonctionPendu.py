@@ -6,10 +6,11 @@ Created on Fri Nov 27 08:01:14 2020
 Fonction utilisé pour le pendu
 ELiott RAJAUD
 27/11/20
-TODO:
+TODO: modidifer la fonction 'dejaUtiliser pour n'en faire qu'une seul pour les deux pendus(modife sur les inputs)
 """
 
 from random import randint
+from tkinter import messagebox
 
 def choixMot():
     ''' Role : prendre un mot aléatoire de Mot.txt
@@ -61,7 +62,7 @@ def affichagePendu(chance,mot):
         
 def dejaUtiliser(lettreJouer):
     ''' Role : Savoir si une lettre a déja été utilisé
-        Entrée : La liste des lettres joué et la proposition
+        Entrée : La liste des lettres joué
         Sortie : True si la lettre a déja été joué'''
     proposition = input("Saisir lettre ")
     while proposition in lettreJouer:
@@ -82,5 +83,62 @@ def bestScore(score):
             partie = i + 1
     return best,partie
 
-def AffichagePenduImage():
-    return
+
+
+
+chance = 8
+
+def lettreUse(lettreJouer,lettre,listeImage,canevas,item,mot,lettreTrouve,motAChercher,trouver):
+    global chance
+
+    if lettre.get() in lettreJouer:
+        lettre.set('')
+        messagebox.showinfo('Resaisier lettre')
+    else:
+        lettreJouer.append(lettre.get())
+    OK(lettre,mot,item,canevas,listeImage,lettreTrouve,motAChercher,trouver)
+    print(lettreJouer)
+       
+    
+
+def OK(lettre,mot,item,canevas,listeImage,lettreTrouve,motAChercher,trouver):    
+    global chance
+    
+    if lettre.get() !='' and lettre.get() in mot:
+        lettreTrouve.append(lettre.get())
+        print(lettreTrouve)
+        trouver['text']=lettreCorrect(mot,lettreTrouve,motAChercher)
+        lettre.set('')
+    else:
+        chance = chance - 1
+        lettre.set('')
+        image = affichagePenduTkinter(listeImage,canevas,item,chance)
+        item = canevas.create_image(0,0, anchor='nw', image=image)
+       
+   
+
+
+
+def affichagePenduTkinter(listeImage,canevas,item,chance):
+    ''' Role : Afficher les iamges du pendu au fur et à mesure du nombre de chance restante
+        Entrée : le nombre de chance restante, le canevas
+        Sortie : les differentes images en fonction du nombre de chance'''
+    canevas.delete(item)
+    if chance==7:
+        return listeImage[1]
+    elif chance==6:
+        return listeImage[2]
+    elif chance==5:
+        return listeImage[3]
+    elif chance==4:
+        return listeImage[4]
+    elif chance==3:
+        return listeImage[5]
+    elif chance==2:
+        return listeImage[6]
+    elif chance==1:
+        return listeImage[7]
+    elif chance==0:
+        print('perdu')
+        return listeImage[8]
+
